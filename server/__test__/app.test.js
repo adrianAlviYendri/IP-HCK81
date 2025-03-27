@@ -14,7 +14,7 @@ describe("POST /register", () => {
     expect(res.status).toBe(201);
     expect(res.body).toHaveProperty("message", "Register succesfully");
     expect(res.body).toHaveProperty("id");
-    expect(res.body).toHaveProperty("email", "johndoe@example.com");
+    expect(res.body).toHaveProperty("email", "johndoe@example.co m");
   });
 
   test("Harus gagal jika email kosong", async () => {
