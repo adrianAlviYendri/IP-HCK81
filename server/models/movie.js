@@ -18,10 +18,40 @@ module.exports = (sequelize, DataTypes) => {
   }
   Movie.init(
     {
-      title: DataTypes.STRING,
-      overview: DataTypes.TEXT,
-      posterPath: DataTypes.STRING,
-      releaseDate: DataTypes.DATE,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Title cannot be empty" },
+          notNull: { msg: "Title is required" },
+        },
+      },
+      overview: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Overview cannot be empty" },
+          notNull: { msg: "Overview is required" },
+        },
+      },
+      posterPath: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Poster path cannot be empty" },
+          notNull: { msg: "Poster path is required" },
+          isUrl: { msg: "Poster path must be a valid URL" },
+        },
+      },
+      releaseDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Release date cannot be empty" },
+          notNull: { msg: "Release date is required" },
+          isDate: { msg: "Release date must be a valid date" },
+        },
+      },
     },
     {
       sequelize,
