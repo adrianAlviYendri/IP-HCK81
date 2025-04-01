@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 export default function FormAddUser() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function FormAddUser() {
       Swal.fire({
         icon: "error",
         title: "Register Failed!",
+        text: "provide valid input",
       });
     }
   }
@@ -47,18 +49,16 @@ export default function FormAddUser() {
           onChange={handleChange}
           className="form-control"
           placeholder="Username"
-          required
         />
       </div>
       <div className="mb-3">
         <input
-          type="email"
+          type="text"
           name="email"
           value={user.email}
           onChange={handleChange}
           className="form-control"
           placeholder="Email"
-          required
         />
       </div>
       <div className="mb-3">
@@ -69,7 +69,6 @@ export default function FormAddUser() {
           onChange={handleChange}
           className="form-control"
           placeholder="Password"
-          required
         />
       </div>
       <button type="submit" className="btn btn-dark w-100 py-2 mt-5">

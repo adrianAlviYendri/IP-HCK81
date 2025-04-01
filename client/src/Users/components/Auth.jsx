@@ -1,15 +1,19 @@
 import { Link, Outlet } from "react-router";
 import { useNavigate } from "react-router";
 import Logout from "./Logout";
+import { useEffect } from "react";
 
 export default function Auth() {
   const navigate = useNavigate();
 
   let token = localStorage.getItem("access_token");
 
-  if (!token) {
-    return navigate("/login");
-  }
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

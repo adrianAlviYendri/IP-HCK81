@@ -1,49 +1,3 @@
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
-
-// export const fetchFavorites = createAsyncThunk(
-//   "favorites/fetchFavorites",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const token = localStorage.getItem("access_token");
-//       const response = await axios.get("http://localhost:3000/favorites", {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
-// const favoriteSlice = createSlice({
-//   name: "favorites",
-//   initialState: {
-//     list: [],
-//     loading: false,
-//     error: null,
-//   },
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchFavorites.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchFavorites.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.list = action.payload;
-//       })
-//       .addCase(fetchFavorites.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || "Failed to fetch favorites";
-//       });
-//   },
-// });
-
-// export default favoriteSlice.reducer;
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -111,7 +65,7 @@ const favoriteSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addFavorite.fulfilled, (state, action) => {
-        state.list.push(action.payload); // Menambahkan ke list favorit
+        state.list.push(action.payload);
       })
       .addCase(deleteFavorite.fulfilled, (state, action) => {
         state.list = state.list.filter(

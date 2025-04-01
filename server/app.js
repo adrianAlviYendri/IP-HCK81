@@ -5,17 +5,15 @@ const { signToken } = require("./helpers/jwt");
 const { comparePassword, hashPassword } = require("./helpers/bcrypt");
 const errorHandler = require("./middleware/error-handler");
 const authentication = require("./middleware/authentication");
-const authorization = require("./middleware/authorization");
 const { getMovieRecommendation } = require("./services/gemini");
 const { Op } = require("sequelize");
-const cors = require("cors");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client();
+const cors = require("cors");
 const app = express();
-const port = 3000;
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 app.post("/register", async (req, res, next) => {
   try {
@@ -276,9 +274,5 @@ app.post("/recommend", async (req, res, next) => {
 });
 
 app.use(errorHandler);
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
 
 module.exports = app;

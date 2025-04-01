@@ -1,10 +1,11 @@
 import axios from "axios";
 import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 export default function Login() {
-  const [email, setEmail] = useState("alvi@gmail.com");
-  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   let token = localStorage.getItem("access_token");
@@ -31,11 +32,12 @@ export default function Login() {
   };
 
   async function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
+    // console.log("Encoded JWT ID token: " + response.credential);
     try {
-      await axios.post("http://localhost:3000/google-login", {
+      const res = await axios.post("http://localhost:3000/google-login", {
         googleToken: response.credential,
       });
+      localStorage.setItem("access_token", res.data.access_token);
       navigate("/home");
     } catch (error) {
       console.log("🚀 ~ handleCredentialResponse ~ error:", error);
@@ -74,11 +76,10 @@ export default function Login() {
                 Email <span className="text-danger">*</span>
               </label>
               <input
-                type="email"
+                type="text"
                 id="login-email"
                 className="form-control"
                 placeholder="Enter email address..."
-                required=""
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
